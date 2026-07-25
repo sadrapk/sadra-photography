@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { categories, photos } from "@/db/schema";
 import { eq, count, asc } from "drizzle-orm";
 import { getSession } from "@/lib/auth";
+import { categories, photoCategories } from "@/db/schema";
 
 export async function GET() {
   try {
@@ -20,14 +21,14 @@ export async function GET() {
       .orderBy(asc(categories.order), asc(categories.name));
 
     // Get photo count per category
-    const photoCounts = await db
-      .select({
-        categoryId: photos.categoryId,
-        count: count(),
-      })
-      .from(photos)
-      .groupBy(photos.categoryId);
-
+    // Get photo count per category
+const photoCounts = await db
+  .select({
+    categoryId: photoCategories.categoryId,
+    count: count(),
+  })
+  .from(photoCategories)
+  .groupBy(photoCategories.categoryId);
     const countMap = new Map(
       photoCounts.map((p) => [p.categoryId, p.count])
     );
