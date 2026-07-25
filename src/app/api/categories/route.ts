@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { categories, photos } from "@/db/schema";
 import { eq, count, asc } from "drizzle-orm";
 import { getSession } from "@/lib/auth";
 import { categories, photoCategories } from "@/db/schema";
