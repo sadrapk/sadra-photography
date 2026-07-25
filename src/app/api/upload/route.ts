@@ -36,9 +36,10 @@ export async function POST(req: NextRequest) {
     const ext = file.name.split(".").pop() || "jpg";
     const filename = `${uuidv4()}.${ext}`;
 
-    // آپلود روی Vercel Blob به صورت خصوصی
+   // آپلود روی استوریج عمومی جدید
     const blob = await put(filename, file, {
-      access: "private",
+      access: "public",
+      storeId: process.env.PUBLIC_BLOB_STORE_ID,
     });
 
     return NextResponse.json({
