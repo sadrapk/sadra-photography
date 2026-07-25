@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
+import { put } from "@vercel/blob";
 import { v4 as uuidv4 } from "uuid";
 
 export async function POST(req: NextRequest) {
@@ -21,7 +20,7 @@ export async function POST(req: NextRequest) {
     const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { error: "فرمت فایل پشتیبانی نمی‌شود. فقط JPEG، PNG، WEBP مجاز است" },
+        { error: "فرمت فایل پشتیبانی نمی‌شود. فقط مجاز است JPEG, PNG, WEBP" },
         { status: 400 }
       );
     }
@@ -34,21 +33,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
     const ext = file.name.split(".").pop() || "jpg";
     const filename = `${uuidv4()}.${ext}`;
 
-    const uploadDir = join(process.cwd(), "public", "uploads");
-    await mkdir(uploadDir, { recursive: true });
-
-    const filePath = join(uploadDir, filename);
-    await writeFile(filePath, buffer);
+    // آپلود مستقیم روی Vercel Blob
+    const blob = await put(filename, file, {
+      access: "public",
+    });
 
     return NextResponse.json({
       success: true,
-      url: `/uploads/${filename}`,
+      url: blob.url,
       filename,
     });
   } catch (error) {
