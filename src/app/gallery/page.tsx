@@ -103,7 +103,7 @@ export default async function GalleryPage() {
           {allCategories.map((cat) => (
             <Link
               key={cat.id}
-              href={`/category/${cat.slug}`}
+              href={`/categories/${cat.slug}`}
               className="px-4 py-2 rounded-full border border-white/20 text-gray-300 text-sm hover:border-yellow-500/40 hover:text-yellow-400 transition-all"
             >
               {cat.name}
