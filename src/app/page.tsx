@@ -175,7 +175,7 @@ export default async function HomePage() {
               {allCategories.map((cat) => (
                 <Link
                   key={cat.id}
-                  href={`/category/${cat.slug}`}
+                  href={`/categories/${cat.slug}`}
                   className="category-card group relative aspect-square rounded-xl overflow-hidden bg-gray-900 border border-white/5 hover:border-yellow-500/30 transition-all hover:-translate-y-1"
                 >
                   {cat.coverImage ? (
