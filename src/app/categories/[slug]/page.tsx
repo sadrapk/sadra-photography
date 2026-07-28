@@ -114,7 +114,7 @@ export default async function CategoryPage({
           {allCategories.map((cat) => (
             <Link
               key={cat.id}
-              href={`/category/${cat.slug}`}
+             href={`/categories/${cat.slug}`}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 cat.slug === slug
                   ? "bg-yellow-500 text-black"
