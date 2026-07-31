@@ -3,10 +3,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "لوموس | Lumos",
-  description: "گالری عکاسی حرفه‌ای - مناظر، پرتره، معماری و بیشتر",
+  title: "صدرا پورکلهر | استودیو و گالری عکاسی لوموس",
+  description: ".وبسایت رسمی صدرا پورکلهر، عکاس حرفه‌ای. نمونه‌کارها و پروژه‌های عکاسی تبلیغاتی، غذا، تئاتر و پرتره",
+  verification: {
+    google: "vp6mWGLLfa9oh0EUHHwGlMf0If5bSCPTZKTR0H7PKGA",
+  },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
